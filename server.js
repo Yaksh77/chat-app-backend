@@ -14,7 +14,7 @@ const app = express();
 const corsOptions = {
   origin: [
     "http://localhost:5173", // local dev frontend
-    "https://chat-frontend-bwt0ga3jp-yaksh77s-projects.vercel.app",
+    "https://chat-app-frontend-tau-lac.vercel.app",
   ],
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
