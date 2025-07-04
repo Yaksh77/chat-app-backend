@@ -29,6 +29,12 @@ const socketIo = (io) => {
     // Leave room handler
     socket.on("leave group", (groupId) => {
       console.log(`${user?.username} has left the group`);
+      const usersInRoom = Array.from(connectedUsers.values())
+        .filter((u) => {
+          u.room === groupId;
+        })
+        .map((u) => u.user);
+      io.in(groupId).emit("users in room", usersInRoom);
       socket.leave(groupId);
       if (connectedUsers.has(socket.id)) {
         connectedUsers.delete(socket.id);
@@ -44,6 +50,12 @@ const socketIo = (io) => {
     // Disconnect handler
     socket.on("disconnect", () => {
       console.log(`${user?.username} is disconnected`);
+      const usersInRoom = Array.from(connectedUsers.values())
+        .filter((u) => {
+          u.room === groupId;
+        })
+        .map((u) => u.user);
+      io.in(groupId).emit("users in room", usersInRoom);
       if (connectedUsers.has(socket.id)) {
         const userData = connectedUsers.get(socket.id);
         socket.to(userData.room).emit("user left", user?._id);
