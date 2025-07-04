@@ -14,11 +14,11 @@ const app = express();
 const corsOptions = {
   origin: [
     "http://localhost:5173", // local dev frontend
-    "https://your-deployed-frontend.vercel.app", // deployed frontend (if any)
+    "https://chat-frontend-bwt0ga3jp-yaksh77s-projects.vercel.app",
   ],
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: true, // if you plan to use cookies or sessions
+  credentials: true,
 };
 
 app.use(cors(corsOptions));
@@ -33,7 +33,7 @@ const io = Server(server, {
 });
 
 app.use(express.json());
-// app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 
 mongoose
   .connect(process.env.MONGO_URI)
