@@ -13,7 +13,7 @@ dotenv.config();
 const app = express();
 const corsOptions = {
   origin: [
-    "http://localhost:5173", // local dev frontend
+    "http://localhost:5173",
     "https://chat-app-frontend-tau-lac.vercel.app",
   ],
   methods: ["GET", "POST", "PUT", "DELETE"],
